@@ -1,6 +1,5 @@
 import React from 'react'
 import { assets } from '../assets/assets'
-import dangerouslySetInnerHTML from 'react-dom'
 
 const JobCard = ({job}) => {
   return (
