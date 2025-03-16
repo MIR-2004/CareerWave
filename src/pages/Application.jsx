@@ -9,7 +9,6 @@ const Application = () => {
   const [resume, setResume] = useState(null)
 
 
-
   return (
     <>
     <Navbar/>
