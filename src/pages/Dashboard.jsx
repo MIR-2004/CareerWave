@@ -29,7 +29,7 @@ const Dashboard = () => {
        </div>
 
 
-       <div className="flex items-center">
+       <div className="flex ">
 
             {/**Left side bar */}
             <div className='inline-block min-h-screen border-r-2'>
@@ -51,7 +51,7 @@ const Dashboard = () => {
                 </ul>
             </div>
 
-            <div>
+            <div className='flex items-start justify-start'>
                 <Outlet />
             </div>
        </div>

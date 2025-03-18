@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
-import {Appcontext} from '../context/Appcontext'
+import { Appcontext } from '../context/Appcontext'
 
 
 const RecruiterLogin = () => {
@@ -13,7 +13,7 @@ const RecruiterLogin = () => {
 
   const [isTextDataSubmited, setIsTextDataSubmited] = useState(false)
 
-  const {setShowRecruiterLogin} = useContext(Appcontext)
+  const { setShowRecruiterLogin } = useContext(Appcontext)
 
   const onSubmitHandler = (e) => {
     e.preventDefault()
@@ -22,7 +22,7 @@ const RecruiterLogin = () => {
     }
   }
 
-  useEffect (() => {
+  useEffect(() => {
     document.body.style.overflow = 'hidden'
 
     return () => {
@@ -36,7 +36,7 @@ const RecruiterLogin = () => {
         <h1 className='text-center text-2xl text-neutral-700 font-medium'>Recruiter {state}</h1>
         <p className='text-sm '>Welcome Back! Please sign in to continue</p>
         {state === "Sign Up" && isTextDataSubmited ? (<>
-          
+
           <div className='flex items-center gap-4 my-10'>
             <label htmlFor='image'>
               <img className='w-16 rounded-full' src={image ? URL.createObjectURL(image) : assets.upload_area} alt="" />
@@ -44,7 +44,7 @@ const RecruiterLogin = () => {
             </label>
             <p>Upload Company <br /> Logo </p>
           </div>
-        
+
         </>) : (<>
 
           {state !== 'Login' && (
@@ -64,17 +64,17 @@ const RecruiterLogin = () => {
 
         </>)}
 
-        {state === 'Login' && <p className='text-sm text-blue-600 mt-4 cursor-pointer'>Forgot password</p>}
+        {state === 'Login' && <p className='text-sm text-blue-600 mt-4 cursor-pointer'>Forgot password ? </p>}
 
         <button type='submit' className='bg-blue-600 w-full text-white py-2 rounded-full mt-4'>
-          {state === 'Login' ? 'login' : isTextDataSubmited ? 'create account' : 'Next' }
+          {state === 'Login' ? 'login' : isTextDataSubmited ? 'create account' : 'Next'}
         </button>
 
         {state === 'Login' ? (<p className='mt-5 text-center'>Don't have an account? <span className='text-blue-600 cursor-pointer' onClick={() => setState('Sign Up')}>Sign Up</span></p>) : (<p className='mt-5 text-center'>Already have an account? <span className='text-blue-600 cursor-pointer' onClick={() => setState('Login')}>Login</span></p>)}
-      
 
-      <img onClick={e => setShowRecruiterLogin(false)} src={assets.cross_icon} className='absolute top-5 right-5 cursor-pointer' alt="" />
-      
+
+        <img onClick={e => setShowRecruiterLogin(false)} src={assets.cross_icon} className='absolute top-5 right-5 cursor-pointer' alt="" />
+
       </form>
     </div>
   )
