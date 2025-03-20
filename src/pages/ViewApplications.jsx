@@ -30,8 +30,7 @@ const ViewApplications = () => {
                   <td className='p-2 px-4 border-b'>
                     <a href="" target='_blank' className='bg-blue-50 text-blue-400 px-3 py-1 rounded inline-flex gap-2 items-center'>Resume
                     <img src={assets.resume_download_icon} alt="" />
-                      </a> 
-                    
+                    </a> 
                   </td>
                   <td className=' py-2 px-4 border-b relative'>
                     <div className='relative inline-block text-left group'>
