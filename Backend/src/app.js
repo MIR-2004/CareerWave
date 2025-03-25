@@ -22,4 +22,5 @@ app.get('/', (req, res) => {
     res.send('Server is started successfully!!')
 })
 
+
 export {app}
