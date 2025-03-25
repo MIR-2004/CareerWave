@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js"
+    "start": "nodemon src/index.js && npm run sentry:sourcemaps",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org study-jbd --project job-portal ./out && sentry-cli sourcemaps upload --org study-jbd --project job-portal ./out"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@sentry/cli": "^2.42.4",
     "@sentry/node": "^9.8.0",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.6.0",
