@@ -14,7 +14,7 @@
   "description": "",
   "dependencies": {
     "@sentry/cli": "^2.42.4",
-    "@sentry/node": "^9.8.0",
+    "@sentry/node": "^9.9.0",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.6.0",
     "cors": "^2.8.5",
