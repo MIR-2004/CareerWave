@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js && npm run sentry:sourcemaps",
+    "server": "nodemon src/index.js && npm run sentry:sourcemaps",
+    "start" : "node src/index.js",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org study-jbd --project job-portal ./out && sentry-cli sourcemaps upload --org study-jbd --project job-portal ./out"
   },
   "keywords": [],

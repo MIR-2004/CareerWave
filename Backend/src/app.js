@@ -22,10 +22,10 @@ app.use(express.static('public'))
 // import routes
 
 app.get('/', (req, res) => {
-    res.send('Server is started successfully!!')
+    res.send('Server is Running successfully!!')
 })
 
-app.post('/webhook', clerkWebhooks)
+app.post('/webhooks', clerkWebhooks)
 
 
 export {app}
