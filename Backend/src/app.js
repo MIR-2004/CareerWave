@@ -4,6 +4,7 @@ import cors from 'cors'
 import * as Sentry from "@sentry/node"
 import { clerkWebhooks } from "./controllers/webhooks.js";
 import companyRoutes from './routes/company.routes.js'
+import connectCloudinary from "./config/cloudinary.config.js";
 
 
 
@@ -16,7 +17,7 @@ app.use(cors({
     credentials: true
 }))
 app.use(express.json({limit: '5mb'}))
-app.use(express.urlencoded({extended: true, limit: '100kb'}))
+app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 
 
