@@ -20,7 +20,6 @@ const registerCompany = asyncHandler( async(req, res) => {
     if (!imageFile) {
         throw new ApiError(400, "Image is required")
     }
-
    
 
     try {
@@ -32,10 +31,9 @@ const registerCompany = asyncHandler( async(req, res) => {
 
         const salt = await bcrypt.genSalt(10)
         const hashPassword = await bcrypt.hash(password, salt)
+        
 
         const imageUpload = await cloudinary.uploader.upload(imageFile.path)
-
-        console.log(imageUpload)
 
         if (!imageUpload) {
             throw new ApiError(500, "Failed to upload image on cloudinary")
@@ -76,7 +74,35 @@ const registerCompany = asyncHandler( async(req, res) => {
 
 // login company
 const loginCompany = asyncHandler( async(req, res) => {
-   
+   const {email, password} = req.body
+
+   if ([email, password].some(field => field?.trim() === "")) {
+    throw new ApiError(400, "Email and Password are required")
+   }
+
+   try {
+        const company = await Company.findOne({email})
+
+        if (bcrypt.compare(password, company.password)) {
+           res.status(200).json({
+            success: true,
+            company: {
+                _id: company._id,
+                name: company.name,
+                email: company.email,
+                image: company.image
+            },
+            token: generateToken(company._id)
+           })
+        }else{
+            throw new ApiError(400, "Invalid email or password")
+        }
+   } catch (error) {
+        res.json({
+            success: false,
+            message: error.message
+        })
+   }
 })
 
 // get company data
