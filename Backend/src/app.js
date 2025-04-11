@@ -4,7 +4,7 @@ import cors from 'cors'
 import * as Sentry from "@sentry/node"
 import { clerkWebhooks } from "./controllers/webhooks.js";
 import companyRoutes from './routes/company.routes.js'
-import connectCloudinary from "./config/cloudinary.config.js";
+import jobRoutes from './routes/job.routes.js'
 
 
 
@@ -29,6 +29,7 @@ app.get('/', (req, res) => {
 
 app.post('/webhooks', clerkWebhooks)
 app.use('/api/company', companyRoutes)
+app.use('/api/jobs', jobRoutes)
 
 
 export {app}

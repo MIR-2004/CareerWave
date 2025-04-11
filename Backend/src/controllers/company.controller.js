@@ -4,6 +4,7 @@ import { Company } from "../models/company.model.js";
 import bcrypt from "bcrypt"
 import { v2 as cloudinary} from "cloudinary"
 import generateToken from "../utils/generateToken.js";
+import { Job } from "../models/job.model.js";
 
 
 // register company
@@ -112,7 +113,41 @@ const getCompanyData = asyncHandler( async(req, res) => {
 
 // post jobs
 const postJob= asyncHandler( async(req, res) => {
+    const {title, description, location, salary, level, category} = req.body
+
+    const companyId = req.company._id
+
+    if (!companyId) {
+        throw new ApiError(400, "Company not found")
+        
+    }
    
+    try {
+        const newJob = new Job({
+            title,
+            description,
+            location,
+            salary,
+            companyId,
+            date: Date.now(),
+            level,
+            category
+        })
+
+        await newJob.save()
+
+        res.status(200).json({
+            success: true,
+            job: newJob,
+            message: "Job posted successfully"
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+
 })
 
 // get company job applications
