@@ -109,6 +109,22 @@ const loginCompany = asyncHandler( async(req, res) => {
 // get company data
 const getCompanyData = asyncHandler( async(req, res) => {
    
+
+    try {
+
+        const company = req.company
+
+        res.status(200).json({
+            success: true,
+            company
+        })
+        
+    } catch (error) {
+        res.json({
+            success: false,
+            message: error.message
+        })
+    }
 })
 
 // post jobs
@@ -157,7 +173,21 @@ const getCompanyJobApplicants = asyncHandler( async(req, res) => {
 
 //get company posted jobs
 const getCompanyPostedJobs = asyncHandler( async(req, res) => {
-   
+   try {
+    const companyId = req.company._id
+
+    const jobs = await Job.find({companyId})
+
+    res.status(200).json({
+        success: true,
+        jobs
+    })
+   } catch (error) {
+    res.status(500).json({
+        success: false,
+        message: error.message
+    })
+   }
 })
 
 //change job application status
@@ -168,7 +198,30 @@ const changeJobApplicationStatus = asyncHandler( async(req, res) => {
 
 //change job visibility
 const changeVisibility = asyncHandler( async(req, res) => {
-   
+   try {
+    const {jobId} = req.body
+    console.log(jobId)
+
+    const comapnyId = req.companyId._id
+
+    const job = await Job.findById(jobId)
+
+    if(comapnyId.toString() === job.companyId.toString()){
+        job.visible = !job.visible
+    }
+
+    await job.save()
+
+    res.json({
+        success: true,
+        message: "Job visibility changed successfully"
+    })
+   } catch (error) {
+    res.status(500).json({
+        success: false,
+        message: error.message
+    })
+   }
 })
 
 export {
