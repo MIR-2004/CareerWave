@@ -1,4 +1,4 @@
-import { asyncHandler } from "../utils/asyncHandler";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 //get user data
 const getUserData = asyncHandler(async (req, res) => {
