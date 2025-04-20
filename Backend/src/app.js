@@ -5,7 +5,7 @@ import * as Sentry from "@sentry/node"
 import { clerkWebhooks } from "./controllers/webhooks.js";
 import companyRoutes from './routes/company.routes.js'
 import jobRoutes from './routes/job.routes.js'
-
+import userRoutes from './routes/user.routes.js'
 
 
 const app = express()
@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
 app.post('/webhooks', clerkWebhooks)
 app.use('/api/company', companyRoutes)
 app.use('/api/jobs', jobRoutes)
+app.use('/api/user', userRoutes)
 
 
 export {app}
