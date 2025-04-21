@@ -57,7 +57,7 @@ const registerCompany = asyncHandler( async(req, res) => {
             throw new ApiError(500, "Failed to send the data to database")
         }
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             company: createdCompany,
             token: generateToken(company._id)
@@ -85,7 +85,7 @@ const loginCompany = asyncHandler( async(req, res) => {
         const company = await Company.findOne({email})
 
         if (bcrypt.compare(password, company.password)) {
-           res.status(200).json({
+           return res.status(200).json({
             success: true,
             company: {
                 _id: company._id,
@@ -114,7 +114,7 @@ const getCompanyData = asyncHandler( async(req, res) => {
 
         const company = req.company
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             company
         })
@@ -152,7 +152,7 @@ const postJob= asyncHandler( async(req, res) => {
 
         await newJob.save()
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             job: newJob,
             message: "Job posted successfully"
@@ -178,7 +178,7 @@ const getCompanyPostedJobs = asyncHandler( async(req, res) => {
 
     const jobs = await Job.find({companyId})
 
-    res.status(200).json({
+    return res.status(200).json({
         success: true,
         jobs
     })
@@ -211,7 +211,7 @@ const changeVisibility = asyncHandler( async(req, res) => {
 
     await job.save()
 
-    res.json({
+    return res.json({
         success: true,
         message: "Job visibility changed successfully"
     })

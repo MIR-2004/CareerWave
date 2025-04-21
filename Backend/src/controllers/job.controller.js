@@ -10,7 +10,7 @@ const getJobs = asyncHandler(async (req, res) => {
         if(!jobs){
             throw new Error("No jobs found")
         }
-        res.json({
+        return res.json({
             success: true,
             jobs
         })
@@ -32,7 +32,7 @@ const getJobById = asyncHandler(async (req, res) => {
         if(!job){
             throw new Error("Job not found")
         }
-        res.json({
+        return res.json({
             success: true,
             job
         })

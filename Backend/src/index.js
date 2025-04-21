@@ -3,6 +3,8 @@ import { app } from "./app.js";
 import connectDB from "./db/index.js";
 import connectCloudinary from "./config/cloudinary.config.js";
 
+
+
 const port = process.env.PORT || 3000;
 
 connectDB().then(
@@ -17,5 +19,7 @@ connectDB().then(
 ).catch((err) => {
     console.log("Mongodb connection error", err)
 })
+
+
 
 await connectCloudinary()

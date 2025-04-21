@@ -6,6 +6,7 @@ import { clerkWebhooks } from "./controllers/webhooks.js";
 import companyRoutes from './routes/company.routes.js'
 import jobRoutes from './routes/job.routes.js'
 import userRoutes from './routes/user.routes.js'
+import  { clerkMiddleware } from "@clerk/express";
 
 
 const app = express()
@@ -19,6 +20,7 @@ app.use(cors({
 app.use(express.json({limit: '5mb'}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
+app.use(clerkMiddleware())
 
 
 // import routes
