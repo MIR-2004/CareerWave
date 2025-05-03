@@ -84,7 +84,7 @@ const loginCompany = asyncHandler( async(req, res) => {
    try {
         const company = await Company.findOne({email})
 
-        if (bcrypt.compare(password, company.password)) {
+        if (await bcrypt.compare(password, company.password)) {
            return res.status(200).json({
             success: true,
             company: {

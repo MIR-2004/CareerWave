@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { jobsData } from "../assets/assets";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 export const Appcontext = createContext()
 
@@ -8,8 +10,8 @@ export const AppContextProvider = (props) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
     const [searchFilter, setSearchFilter] = useState({
-        title:'',
-        location:''
+        title: '',
+        location: ''
     })
 
     const [isSearched, setIsSearched] = useState(false)
@@ -29,12 +31,41 @@ export const AppContextProvider = (props) => {
         setJobs(jobsData)
     }
 
+
+    // function to fetch company data
+    const fetchCompanyData = async () => {
+        try {
+            const { data } = await axios.get(backendUrl + '/api/company/company', { headers: { token: companyToken } })
+            if (data.success) {
+                setCompanyData(data.company)
+                console.log(data)
+            } else {
+                toast.error(data.message)
+            }
+        } catch(error) {
+            toast.error(error.message)
+        }
+    }
+
     useEffect(() => {
         fetchJobs()
+
+        const storedCompanyToken = localStorage.getItem('companyToken')
+        if (storedCompanyToken) {
+            setCompanyToken(storedCompanyToken)
+        }
     }, [])
-    
+
+    useEffect(() => {
+
+        if (companyToken) {
+            fetchCompanyData()
+        }
+    }, [companyToken])
+
+
     const value = {
-        setSearchFilter,searchFilter,
+        setSearchFilter, searchFilter,
         isSearched, setIsSearched,
         jobs, setJobs,
         showRecruiterLogin, setShowRecruiterLogin,

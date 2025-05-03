@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Appcontext } from '../context/Appcontext'
 import { assets, JobCategories, JobLocations } from '../assets/assets'
-import JobCard from './jobCard'
+import JobCard from './JobCard'
 
 const JobListing = () => {
 
