@@ -1,11 +1,41 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { manageJobsData } from '../assets/assets'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
+import { Appcontext } from '../context/Appcontext'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const ManageJobs = () => {
 
   const navigate = useNavigate()
+
+  const [jobs, setJobs] = useState([])
+
+  const {backendUrl, companyToken} = useContext(Appcontext);
+
+
+  const fetchCompanyJobs = async() => {
+    try {
+      const {data} = await axios.get(backendUrl+"/api/company/list-jobs", {headers:{token: companyToken}})
+
+      if (data.success) {
+        setJobs(data.jobsData)
+        console.log(data.jobsData)
+      }else{
+        toast.error("Cannot get the data")
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
+
+  useEffect(() => {
+    if(companyToken){
+      fetchCompanyJobs()
+    }
+  }, [companyToken])
 
   return (
     <div className='container p-4 max-w-5xl'>
@@ -23,7 +53,7 @@ const ManageJobs = () => {
           </thead>
           <tbody>
             {
-              manageJobsData.map((job, index) => (
+              jobs.map((job, index) => (
                <tr key={index}  className='text-gray-700'>
                 <td className='py-2 px-4 border-b max-sm:hidden'>{index+1}</td>
                 <td className='py-2 px-4 border-b'>{job.title}</td>
