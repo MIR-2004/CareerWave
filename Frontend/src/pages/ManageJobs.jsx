@@ -31,7 +31,7 @@ const ManageJobs = () => {
   }
 
   //Change job visibility
-  const changeJobVisibility = async ()  => {
+  const changeJobVisibility = async (id)  => {
     try {
      
       const {data} = await axios.post(backendUrl+'/api/company/change-visibility',{ id }, { headers: {token: companyToken}})
