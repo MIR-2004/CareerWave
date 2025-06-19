@@ -21,7 +21,6 @@ const ManageJobs = () => {
 
       if (data.success) {
         setJobs(data.jobsData)
-        console.log(data.jobsData)
       }else{
         toast.error("Cannot get the data")
       }
@@ -34,8 +33,7 @@ const ManageJobs = () => {
   const changeJobVisibility = async (id)  => {
     try {
      
-      const {data} = await axios.post(backendUrl+'/api/company/change-visibility',{ id }, { headers: {token: companyToken}})
-
+      const {data} = await axios.post(`${backendUrl}/api/company/change-visibility`,{ id }, { headers: {token: companyToken}})
     if (data.success) {
       toast.success(data.message)
       fetchCompanyJobs()

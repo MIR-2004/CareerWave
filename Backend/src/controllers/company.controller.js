@@ -208,6 +208,7 @@ const changeJobApplicationStatus = asyncHandler( async(req, res) => {
 const changeVisibility = asyncHandler( async(req, res) => {
    try {
     const jobId = req.body.id
+    console.log(jobId)
 
     const comapnyId = req.company._id
 
