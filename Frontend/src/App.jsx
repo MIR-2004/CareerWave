@@ -27,7 +27,6 @@ const App = () => {
           <Route path='manage-job' element={<ManageJobs/>} />
           <Route path='view-application' element={<ViewApplications/>} />
            </>  : null}
-          
         </Route>
       </Routes>
     </div>
